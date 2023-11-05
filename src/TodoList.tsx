@@ -15,9 +15,10 @@ const rendomImages=[blueDot,greenDot,redDot,whiteDot];
 
 const TodoListContainer=styled.div`
 display:flex;
+align-items:center;
+justify-content:center;
 flex-direction:column;
 gap:15px;
-
 width:650px;
 `;
 
@@ -25,14 +26,18 @@ const TodoListItems=styled.div`
 display:flex;
 align-items:center;
 justify-content:space-between;
-width: 517px;
+width: 530px;
 height:35px;
 border-radius: 8px;
 background: #FFF;
-padding-left:15px;
-padding-right:15px;
+overflow: hidden;
 color: #000;
 font-size: 16px;
+cursor: pointer;
+
+&:hover .date {
+  opacity: 1;
+}
 `;
 
 const TimeStamp=styled.p`
@@ -43,29 +48,24 @@ font-weight: 500;
 line-height: normal;
 border-radius: 8px;
 background: rgba(160, 172, 231, 0.10);
+opacity: 0; 
+transition: opacity 0.3s;
 `;
-const TodoList=({todoes}:{todoes:string[]})=>{
- 
-  
-    return(
-      <TodoListContainer>
 
-     {todoes.map((i,index)=>(
-      <TodoListItems key={index}>
-        <img src={Checkbox} alt="" />
-        {i}
-       <TimeStamp className='date'>
-       
-       </TimeStamp>
-        <img src={rendomImages[Math.floor(Math.random() * rendomImages.length)]} alt="" />
+
+const TodoList = ({ todos }: { todos: { text: string; date: string }[] }) => {
+  return (
+    <TodoListContainer>
+      {todos.map((task, index) => (
+        <TodoListItems key={index}>
+       <img style={{ paddingLeft: '10px' }} src={Checkbox} alt="" />
+          <p>{task.text}</p>
+          <TimeStamp className='date'>{task.date}</TimeStamp>
+        <img style={{ paddingRight: '10px' }} src={rendomImages[Math.floor(Math.random() * rendomImages.length)]} alt="" />
         </TodoListItems>
-     ))} 
-
-      </TodoListContainer>
-       
-       
-     
-    )
-}
+      ))}
+    </TodoListContainer>
+  );
+};
 
 export default TodoList;
