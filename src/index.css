@@ -19,4 +19,6 @@ code {
     font-family: 'Inter';
   }
 
- 
+ .DoneToDo{
+  text-decoration: line-through;
+ }

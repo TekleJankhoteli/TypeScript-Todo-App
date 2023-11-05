@@ -2,15 +2,6 @@ import React, { useState } from 'react';
 import { styled } from "styled-components";
 import Checkbox from "./assets/checkbox.png";
 import CheckboxDone from "./assets/checkboxDone.png";
-import blueDot from "./assets/blueDot.png";
-import greenDot from "./assets/greenDot.png";
-import redDot from "./assets/redDot.png";
-import whiteDot from "./assets/whiteDot.png";
-
-
-
-const rendomImages=[blueDot,greenDot,redDot,whiteDot];
-
 
 
 const TodoListContainer=styled.div`
@@ -20,6 +11,15 @@ justify-content:center;
 flex-direction:column;
 gap:15px;
 width:650px;
+
+// Responsive
+
+  @media (max-width: 767px) {
+   
+    width: 370px; 
+  
+  }
+
 `;
 
 const TodoListItems=styled.div`
@@ -34,6 +34,16 @@ overflow: hidden;
 color: #000;
 font-size: 16px;
 cursor: pointer;
+
+// Responsive
+
+  @media (max-width: 767px) {
+   
+    width: 300px; 
+  
+  }
+
+
 
 &:hover .date {
   opacity: 1;
@@ -52,18 +62,32 @@ opacity: 0;
 transition: opacity 0.3s;
 `;
 
+const Task=styled.p`
+font-size:16px;
+`
 
-const TodoList = ({ todos }: { todos: { text: string; date: string }[] }) => {
+
+
+const TodoList = ({ todos,toggleTodoDone,deleteTodo }: { todos: { text: string; date: string; done:boolean; image:string }[],toggleTodoDone: (index:number)=>void,deleteTodo:(index:number) =>void}) => {
+
+  
   return (
     <TodoListContainer>
+
       {todos.map((task, index) => (
-        <TodoListItems key={index}>
-       <img style={{ paddingLeft: '10px' }} src={Checkbox} alt="" />
-          <p>{task.text}</p>
+        <TodoListItems key={index} >
+
+       <img style={{ paddingLeft: '10px' }} src={task.done? CheckboxDone: Checkbox } alt="" onClick={() => toggleTodoDone(index)} />
+
+          <Task className={task.done? "DoneToDo" : " "}>{task.text}</Task>
+
           <TimeStamp className='date'>{task.date}</TimeStamp>
-        <img style={{ paddingRight: '10px' }} src={rendomImages[Math.floor(Math.random() * rendomImages.length)]} alt="" />
+          
+        <img style={{ paddingRight: '10px' }} src={task.image} onClick={()=>deleteTodo(index)} alt="" />
+
         </TodoListItems>
       ))}
+
     </TodoListContainer>
   );
 };

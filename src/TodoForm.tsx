@@ -8,6 +8,15 @@ align-items:center;
 justify-content:center;
 width:650px;
 margin-bottom:20px;
+
+// Responsive
+
+  @media (max-width: 767px) {
+   
+    width: 370px; 
+  
+  }
+
 `;
 
 const Input=styled.input`
@@ -17,6 +26,16 @@ border-radius: 12px;
 background: #E5E5E7;
 border:none;
 padding-left:15px;
+
+
+// Responsive
+
+  @media (max-width: 767px) {
+   
+    width: 300px; 
+  
+  }
+
 `;
 
 
